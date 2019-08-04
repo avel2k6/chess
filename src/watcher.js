@@ -1,8 +1,39 @@
 import { watch } from 'melanke-watchjs';
-import '../assets/application.css';
 
 export default (state) => {
   const chessFieldDiv = document.querySelector('#chess');
+
+  watch(
+    state,
+    'chessFigures',
+    (prop, action, chess) => {
+      const chessColors = Object.keys(chess);
+      chessColors.forEach(
+        (color) => {
+          const chessFirstPositionDiv = document.getElementById(`${color}`);
+          const chessFirstPositionTable = document.createElement('table');
+          chessFirstPositionDiv.textContent = '';
+          const firstRow = document.createElement('tr');
+          chess[color].forEach(
+            (figuresData) => {
+              const { figure, targets } = figuresData;
+              targets.forEach(
+                (target) => {
+                  const td = document.createElement('td');
+                  td.setAttribute('target', target);
+                  td.textContent = figure;
+                  td.classList.add('item-initial');
+                  firstRow.append(td);
+                },
+              );
+            },
+          );
+          chessFirstPositionTable.append(firstRow);
+          chessFirstPositionDiv.append(chessFirstPositionTable);
+        },
+      );
+    },
+  );
 
   watch(
     state,
@@ -47,7 +78,6 @@ export default (state) => {
     },
   );
 
-
   watch(
     state,
     'targetItem',
@@ -55,11 +85,27 @@ export default (state) => {
       const { checkedItem, targetItem } = state;
 
       const checkedEl = document.getElementById(checkedItem.elId);
-      checkedEl.textContent = targetItem.elText;
+      checkedEl.textContent = ' '; // Если мы хотим, чтобы фигуры 'ели' друг друга
+      // checkedEl.textContent = targetItem.elText; // Если мы хотим, чтобы фигуры менялсь местами
       checkedEl.classList.remove('active');
 
       const targetEl = document.getElementById(targetItem.elId);
       targetEl.textContent = checkedItem.elText;
+    },
+  );
+
+  watch(
+    state,
+    'movedToPosition',
+    (prop, action, newValue) => {
+      const { targetPostition, textContent } = newValue;
+      const targetElement = document.getElementById(targetPostition);
+      targetElement.textContent = textContent;
+
+      const initialElemet = document.querySelector(`[target='${targetPostition}']`);
+      initialElemet.textContent = '';
+      initialElemet.classList.remove('item-initial');
+      initialElemet.classList.add('hidden');
     },
   );
 };

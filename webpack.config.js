@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: `My chess | Build ${new Date()}`,
+      title: 'My chess',
       template: 'assets/index.html',
       filename: 'index.html',
     }),

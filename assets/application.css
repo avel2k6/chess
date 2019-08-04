@@ -1,32 +1,68 @@
 body{
   font: Helvetica,Arial,sans-serif;
   background: #e1e1e1;
-}
-.container {
-  margin: 0 auto;
-  width: 360px;
-}
-.chessfield {
-  text-align: center;
   font-size: 24px;
   font-weight: bold;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.container {
+  margin: 0 auto;
+  width: 480px;
+}
+
+.separator {
+  height: 20px;
+}
+
+.figures{
+  background: #fff;
+  -webkit-box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
+  box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
+  border-radius: 3px;
+  padding: 3px;
+  height: 40px;
+  width: 100%;
+}
+
+.figures table {
+  margin: 0 auto;
+}
+
+.figures table tr td {
+  border: 0px solid #fff;
+  cursor: pointer;
+}
+
+.chessfield {
+  text-align: center;
   -webkit-box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
   box-shadow: 0px 9px 29px -8px rgba(0,0,0,0.75);
   border-radius: 3px;
   overflow: hidden;
+  background: #fff;
 }
 
 .chessfield .active {
-  background: #f9a825!important;
+  text-shadow: 0px 1px 8px rgba(239, 239, 0, 1);
 }
 
 .chessfield table {
+  margin: 0 auto;
   border-collapse: collapse;
 }
+.chessfield table .item {
+  cursor: pointer;
+}
 
-.chessfield table, th, td {
-  border: 0px solid #000;
+.chessfield table tr td {
+  border: 1px solid #e1e1e1;
 }
 
 .chessfield td {
